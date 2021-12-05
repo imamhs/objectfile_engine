@@ -22,14 +22,14 @@ class OFE_file():
         self.arch = -1
         self.type = -1 #1: dyn exec file, 2: static exec file, 3: dyn so file, 4: static so file
         self.stripped = -1
-        self.provide = []
+        self.provide = ""
         self.deps = []
         self.glibc_versions = []
         self.glibcxx_versions = []
 
         self.path = get_shell_output('readlink -z -f "' + os.path.join(_location, _name) + '"')
 
-        self.file = os.path.basename('"' + self.path + '"')
+        self.file = os.path.basename(self.path)
 
         try:
             self.size = os.path.getsize(self.path)
@@ -75,7 +75,7 @@ class OFE_file():
             elif file_command_output_strip == 'not':
                 self.stripped = 0
 
-        self.provide = [l.replace(" ", "")[6:] for l in get_shell_output('objdump -p "' + self.path + '" | grep SONAME').split("\n") if len(l) > 0 and l.find("SONAME")]
+        self.provide = get_shell_output('objdump -p "' + self.path + '" | grep SONAME').replace(" ", "")[6:]
 
         self.deps = [os.path.basename(l.replace(" ", "")[6:]) for l in get_shell_output('objdump -p "' + self.path + '" | grep NEEDED').split("\n") if len(l) > 0]
 
