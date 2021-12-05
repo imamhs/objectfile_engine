@@ -1,3 +1,3 @@
 # objectfile engine
 
-Linux ELF file launcher
+Linux ELF file launcher library
