@@ -15,7 +15,8 @@ class OFE_file():
 
         self.name = _name
         self.location = _location
-        self.path = os.path.join(_location, _name)
+        self.path = ""
+        self.file = ""
         self.size = -1
         self.ck = -1
         self.arch = -1
@@ -25,6 +26,10 @@ class OFE_file():
         self.deps = []
         self.glibc_versions = []
         self.glibcxx_versions = []
+
+        self.path = get_shell_output('readlink -z -f "' + os.path.join(_location, _name) + '"')
+
+        self.file = get_shell_output('basename -z "' + self.path + '"')
 
         try:
             self.size = os.path.getsize(self.path)
