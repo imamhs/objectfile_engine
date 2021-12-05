@@ -29,7 +29,7 @@ class OFE_file():
 
         self.path = get_shell_output('readlink -z -f "' + os.path.join(_location, _name) + '"')
 
-        self.file = get_shell_output('basename -z "' + self.path + '"')
+        self.file = os.path.basename('"' + self.path + '"')
 
         try:
             self.size = os.path.getsize(self.path)
@@ -77,7 +77,7 @@ class OFE_file():
 
         self.provide = [l.replace(" ", "")[6:] for l in get_shell_output('objdump -p "' + self.path + '" | grep SONAME').split("\n") if len(l) > 0 and l.find("SONAME")]
 
-        self.deps = [l.replace(" ", "")[6:] for l in get_shell_output('objdump -p "' + self.path + '" | grep NEEDED').split("\n") if len(l) > 0]
+        self.deps = [os.path.basename(l.replace(" ", "")[6:]) for l in get_shell_output('objdump -p "' + self.path + '" | grep NEEDED').split("\n") if len(l) > 0]
 
         self.glibc_versions = [l[l.find("GLIBC_")+6:] for l in get_shell_output('objdump -p "' + self.path + '" | grep GLIBC_').split("\n") if len(l) > 0 and l.find("GLIBC_")]
 
