@@ -1,11 +1,17 @@
-# Copyright (c) 2021, Md Imam Hossain (emamhd at gmail dot com)
+# Copyright (c) 2023, Md Imam Hossain (emamhd at gmail dot com)
 # see LICENSE.txt for details
 
+# Linux gcc libraries
+LIN_GCC_LIBS_DEPS = ('libasan.so', 'libatomic.so', 'libgcc_s.so', 'libgdruntime.so', 'libgfortran.so', 'libgo.so', 'libgomp.so', 'libgphobos.so', 'libitm.so', 'liblsan.so', 'libobjc.so', 'libquadmath.so', 'libstdc++.so', 'libtsan.so', 'libubsan.so')
+
+# Linux gcc core libraries
+LIN_GCC_CR_DEPS = ('libanl.so', 'libc.so', 'libdl.so', 'libm.so', 'libmemusage.so', 'libmvec.so', 'libnsl.so', 'libnss_compat.so', 'libnss_db.so', 'libnss_dns.so', 'libnss_files.so', 'libnss_hesiod.so', 'libpcprofile.so', 'libpthread.so', 'libresolv.so', 'librt.so', 'libthread_db.so', 'libutil.so', )
+
 # Linux core libraries
-LIN_CR_DEPS = ('librt.so.1', 'libdl.so.2', 'linux-vdso.so.1', 'libpthread.so.0', 'libgcc_s.so.1', 'libc.so.6', 'libm.so.6', 'libstdc++.so.6', 'libstdc++.so.5', 'ld-linux-x86-64.so.2', 'libresolv.so.2', 'libstdc++-libc6.2-2.so.3')
+LIN_CR_DEPS = ('linux-vdso.so', 'linux-gate.so', 'libstdc++.so.6', 'libstdc++.so.5', 'ld-linux-x86-64.so.2', 'libstdc++-libc6.2-2.so.3')
 
 # Linux network and system support libraries
-LIN_STD_LV1_DEPS = ('libdatrie.so.1', 'libfribidi.so.0', 'libsqlite3.so.0', 'libheimbase.so.1', 'libtasn1.so.6', 'libkeyutils.so.1', 'libblkid.so.1', 'libpcre2-8.so.0', 'libgmp.so.10', 'libnettle.so.8', 'libunistring.so.2', 'libkrb5support.so.0', 'libcom_err.so.2', 'libsasl2.so.2', 'libffi.so.8', 'liblber-2.4.so.2', 'libnghttp2.so.14', 'libdb-5.3.so', 'libgomp.so.1', 'libcrypto.so.1.1', 'libcrypto.so.1.0.0', 'libluajit-5.1.so.2', 'libpcre.so.3', 'libslang.so.2', 'libgpg-error.so.0', 'liblzma.so.5', 'libcap-ng.so.0', 'libtinfo.so.5', 'libtinfo.so.6', 'libnspr4.so', 'libutil.so.1', 'libuuid.so.1', 'liblz4.so.1', 'libzstd.so.1', 'libnsl.so.1', 'libcrypt.so.1', 'libexpat.so.1', 'libz.so.1', 'libbsd.so.0', 'libdrm.so.2')
+LIN_STD_LV1_DEPS = ('libdatrie.so.1', 'libfribidi.so.0', 'libsqlite3.so.0', 'libheimbase.so.1', 'libtasn1.so.6', 'libkeyutils.so.1', 'libblkid.so.1', 'libpcre2-8.so.0', 'libgmp.so.10', 'libnettle.so.8', 'libunistring.so.2', 'libkrb5support.so.0', 'libcom_err.so.2', 'libsasl2.so.2', 'libffi.so.8', 'liblber-2.4.so.2', 'libnghttp2.so.14', 'libdb-5.3.so', 'libgomp.so.1', 'libcrypto.so.1.1', 'libcrypto.so.1.0.0', 'libluajit-5.1.so.2', 'libpcre.so.3', 'libslang.so.2', 'libgpg-error.so.0', 'liblzma.so.5', 'libcap-ng.so.0', 'libtinfo.so.5', 'libtinfo.so.6', 'libnspr4.so', 'libutil.so.1', 'libuuid.so.1', 'liblz4.so.1', 'libzstd.so.1', 'libcrypt.so.1', 'libexpat.so.1', 'libz.so.1', 'libbsd.so.0', 'libdrm.so.2')
 
 LIN_STD_DEPS = ( 'libhx509.so.5', 'libwind.so.0', 'libroken.so.18', 'libhcrypto.so.4', 'libasn1.so.8', 'libkrb5.so.26', 'libheimntlm.so.0', 'libp11-kit.so.0', 'libhogweed.so.6', 'libk5crypto.so.3', 'libkrb5.so.3', 'libgnutls.so.30', 'libgssapi.so.3', 'libldap_r-2.4.so.2', 'libgssapi_krb5.so.2', 'libpsl.so.5', 'libssh.so.4', 'librtmp.so.1', 'libidn2.so.0', 'libselinux.so.1', 'libmount.so.1', 'libplc4.so', 'libplds4.so', 'libreadline.so.8', 'libgmodule-2.0.so.0', 'libnss3.so', 'libnssutil3.so', 'libsmime3.so', 'libpcap.so.0.8', 'libssl.so.1.1', 'libgio-2.0.so.0', 'libcurl.so.4', 'libgobject-2.0.so.0', 'libglib-2.0.so.0', 'libncursesw.so.6', 'libdbus-1.so.3', 'libgcrypt.so.20', 'libncurses.so.5', 'libaudit.so.1', 'libpam.so.0', 'libsystemd.so.0', 'libgbm.so.1')
 

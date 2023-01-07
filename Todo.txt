@@ -1,0 +1,2 @@
+- Add versioning information into existing deps information, ie. libsdl.so.7.16 (here libsdl.so is the library and 7 is the major version and 16 is the minor version)
+- Add a new object element for storing system glibc version and other core versions

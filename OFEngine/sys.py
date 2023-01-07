@@ -4,9 +4,11 @@
 import subprocess
 import hashlib
 
+
 def get_shell_output(_command):
     p = subprocess.Popen(_command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
     return p.stdout.read().decode('ascii')[0:-1]
+
 
 def get_file_md5(_filename):
     md5o = hashlib.md5()

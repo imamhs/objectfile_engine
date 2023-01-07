@@ -27,7 +27,7 @@ class OFE_file():
         self.glibc_versions = []
         self.glibcxx_versions = []
 
-        self.path = get_shell_output('readlink -z -f "' + os.path.join(_location, _name) + '"')
+        self.path = get_shell_output('readlink -z -f "' + os.path.join(_location, self.name) + '"')
 
         self.file = os.path.basename(self.path)
 
@@ -45,7 +45,7 @@ class OFE_file():
         except:
             print("Error: unknown error occurred (file checksum)")
 
-        file_command_output = get_shell_output('file -b -p "' + self.path + '"').split(", ")
+        file_command_output = get_shell_output('file -b "' + self.path + '"').split(", ")
 
         if len(file_command_output) > 3:
 
@@ -80,5 +80,9 @@ class OFE_file():
         self.deps = [os.path.basename(l.replace(" ", "")[6:]) for l in get_shell_output('objdump -p "' + self.path + '" | grep NEEDED').split("\n") if len(l) > 0]
 
         self.glibc_versions = [l[l.find("GLIBC_")+6:] for l in get_shell_output('objdump -p "' + self.path + '" | grep GLIBC_').split("\n") if len(l) > 0 and l.find("GLIBC_")]
+        self.glibc_versions = list(dict.fromkeys(self.glibc_versions))
+        self.glibc_versions.sort()
 
         self.glibcxx_versions = [l[l.find("GLIBCXX_") + 8:] for l in get_shell_output('objdump -p "' + self.path + '" | grep GLIBCXX_').split("\n") if len(l) > 0 and l.find("GLIBCXX_")]
+        self.glibcxx_versions = list(dict.fromkeys(self.glibcxx_versions))
+        self.glibcxx_versions.sort()
